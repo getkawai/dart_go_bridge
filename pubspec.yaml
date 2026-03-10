@@ -1,0 +1,28 @@
+name: dart_go_bridge
+description: "Dart/Flutter FFI bridge for Go (Android/iOS)."
+version: 0.0.1
+homepage: https://github.com/getkawai/dart-go-bridge
+
+environment:
+  sdk: ^3.11.1
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ffi: ^2.1.0
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.getkawai.dart_go_bridge
+        pluginClass: DartGoBridgePlugin
+      ios:
+        pluginClass: DartGoBridgePlugin
