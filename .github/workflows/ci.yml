@@ -153,6 +153,7 @@ jobs:
         run: |
           tar -czf android-jniLibs.tar.gz -C android-jniLibs .
           zip -r ios-xcframework.zip ios-xcframework
+          shasum -a 256 android-jniLibs.tar.gz ios-xcframework.zip > checksums.txt
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -160,3 +161,4 @@ jobs:
           files: |
             android-jniLibs.tar.gz
             ios-xcframework.zip
+            checksums.txt
