@@ -38,11 +38,11 @@ jobs:
           cache: true
 
       - name: Run Go tests
-        working-directory: dart_go_bridge/native/go
+        working-directory: native/go
         run: go test ./...
 
       - name: Run Flutter tests
-        working-directory: dart_go_bridge
+        working-directory: .
         run: flutter test
 
   android:
@@ -84,14 +84,14 @@ jobs:
           echo "ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/26.3.11579264" >> $GITHUB_ENV
 
       - name: Build Android native libs
-        working-directory: dart_go_bridge
+        working-directory: .
         run: ./scripts/build_android.sh
 
       - name: Upload Android libs
         uses: actions/upload-artifact@v4
         with:
           name: android-jniLibs
-          path: dart_go_bridge/android/src/main/jniLibs
+          path: android/src/main/jniLibs
 
   ios:
     runs-on: macos-latest
@@ -123,14 +123,14 @@ jobs:
           cache: true
 
       - name: Build iOS native libs
-        working-directory: dart_go_bridge
+        working-directory: .
         run: ./scripts/build_ios.sh
 
       - name: Upload iOS xcframework
         uses: actions/upload-artifact@v4
         with:
           name: ios-xcframework
-          path: dart_go_bridge/ios/DartGoBridge.xcframework
+          path: ios/DartGoBridge.xcframework
 
   release:
     runs-on: ubuntu-latest
