@@ -10,28 +10,53 @@ permissions:
   contents: read
 
 jobs:
-  android:
+  test:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' || github.repository == github.event.pull_request.head.repo.full_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout tools
-        uses: actions/checkout@v4
-        with:
-          repository: getkawai/tools
-          path: tools
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.26.x"
+          cache: true
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
+
+      - name: Run Go tests
+        working-directory: dart_go_bridge/native/go
+        run: go test ./...
+
+      - name: Run Flutter tests
+        working-directory: dart_go_bridge
+        run: flutter test
+
+  android:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.repository == github.event.pull_request.head.repo.full_name }}
+    needs: [test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.x"
+          cache: true
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -55,25 +80,23 @@ jobs:
   ios:
     runs-on: macos-latest
     if: ${{ github.event_name != 'pull_request' || github.repository == github.event.pull_request.head.repo.full_name }}
+    needs: [test]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout tools
-        uses: actions/checkout@v4
-        with:
-          repository: getkawai/tools
-          path: tools
 
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.26.x"
+          cache: true
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - name: Build iOS native libs
         working-directory: dart_go_bridge

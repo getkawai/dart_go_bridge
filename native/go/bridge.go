@@ -4,20 +4,7 @@ package main
 // #include <stdlib.h>
 import "C"
 
-import (
-	"unsafe"
-
-	"github.com/getkawai/tools/mobilebridge"
-)
-
-//export GoWebSearchJSON
-func GoWebSearchJSON(query *C.char) *C.char {
-	if query == nil {
-		return nil
-	}
-	out := mobilebridge.WebSearchJSON(C.GoString(query))
-	return C.CString(out)
-}
+import "unsafe"
 
 //export GoFreeString
 func GoFreeString(ptr *C.char) {
