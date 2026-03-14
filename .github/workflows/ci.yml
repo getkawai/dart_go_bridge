@@ -80,7 +80,9 @@ jobs:
       - name: Install NDK
         shell: bash
         run: |
-          yes | sdkmanager "ndk;26.3.11579264" > /dev/null
+          sdkmanager "ndk;26.3.11579264" > /dev/null
+          set +o pipefail
+          yes | sdkmanager --licenses > /dev/null
           echo "ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/26.3.11579264" >> $GITHUB_ENV
 
       - name: Build Android native libs
