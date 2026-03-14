@@ -124,6 +124,9 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Set Xcode developer dir
+        run: echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> $GITHUB_ENV
+
       - name: Build iOS native libs
         working-directory: .
         run: ./scripts/build_ios.sh
