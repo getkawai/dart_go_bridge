@@ -11,13 +11,17 @@ build_ios() {
   local suffix=$3
   local out="$OUT_DIR/libdart_go_bridge_${suffix}.a"
   local sdkroot
+  local cc
   sdkroot=$(xcrun --sdk "$sdk" --show-sdk-path)
+  cc=$(xcrun --sdk "$sdk" --find clang)
 
   pushd "$GO_DIR" >/dev/null
-  CC=$(xcrun --sdk "$sdk" --find clang) \
+  env \
     SDKROOT="$sdkroot" \
-    CGO_CFLAGS="--sysroot $sdkroot" \
-    CGO_LDFLAGS="--sysroot $sdkroot" \
+    CC="$cc -isysroot $sdkroot" \
+    CGO_CFLAGS="-isysroot $sdkroot" \
+    CGO_CPPFLAGS="-isysroot $sdkroot" \
+    CGO_LDFLAGS="-isysroot $sdkroot" \
     CGO_ENABLED=1 GOOS=ios GOARCH="$arch" \
     go build -buildmode=c-archive -o "$out" .
   popd >/dev/null
