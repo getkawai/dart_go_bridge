@@ -25,8 +25,16 @@ build_abi() {
   mkdir -p "$out"
 
   pushd "$GO_DIR" >/dev/null
-  CC="$cc" GOOS=android GOARCH="$goarch" ${goarm:+GOARM=$goarm} CGO_ENABLED=1 \
-    go build -buildmode=c-shared -o "$out/libdart_go_bridge.so" .
+  envs=(
+    "CC=$cc"
+    "GOOS=android"
+    "GOARCH=$goarch"
+    "CGO_ENABLED=1"
+  )
+  if [[ -n "$goarm" ]]; then
+    envs+=("GOARM=$goarm")
+  fi
+  env "${envs[@]}" go build -buildmode=c-shared -o "$out/libdart_go_bridge.so" .
   popd >/dev/null
 }
 
