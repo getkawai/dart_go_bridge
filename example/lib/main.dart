@@ -23,10 +23,11 @@ class _MyAppState extends State<MyApp> {
 
   void _initBridge() {
     try {
-      final bridge = DartGoBridge();
-      final searchJson = bridge.webSearchJson('latest AI news');
+      final bridge = StoreBridge.create();
+      final contributors = bridge.listContributors();
+      bridge.dispose();
       setState(() {
-        _status = 'Search: $searchJson';
+        _status = 'Contributors: $contributors';
       });
     } catch (e) {
       setState(() {
