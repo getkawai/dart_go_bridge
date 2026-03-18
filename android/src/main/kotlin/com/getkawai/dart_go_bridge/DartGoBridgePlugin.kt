@@ -1,4 +1,4 @@
-package getkawai.dart_go_bridge
+package com.getkawai.dart_go_bridge
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall

@@ -34,6 +34,16 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Cache Flutter pub deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            example/.dart_tool
+          key: ${{ runner.os }}-flutter-pub-${{ hashFiles('example/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-pub-
+
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
@@ -81,7 +91,9 @@ jobs:
 
       - name: Build APK (example app)
         working-directory: example
-        run: flutter build apk --release
+        run: |
+          flutter pub get
+          flutter build apk --release
 
       - name: Compute release metadata
         id: meta

@@ -1,4 +1,4 @@
-group = "getkawai.dart_go_bridge"
+group = "com.getkawai.dart_go_bridge"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -27,7 +27,7 @@ plugins {
 }
 
 android {
-    namespace = "getkawai.dart_go_bridge"
+    namespace = "com.getkawai.dart_go_bridge"
 
     compileSdk = 36
 
