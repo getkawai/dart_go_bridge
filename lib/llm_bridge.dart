@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
-class LlmBridge {
+import 'llm_bridge_interface.dart';
+
+class LlmBridge implements LlmBridgeInterface {
   LlmBridge._(this._lib) {
     _llmGenerateTextJson = _lib.lookupFunction<
         Pointer<Utf8> Function(Pointer<Utf8>),

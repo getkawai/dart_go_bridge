@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
-class StoreBridge {
+import 'store_bridge_interface.dart';
+
+class StoreBridge implements StoreBridgeInterface {
   StoreBridge._(this._lib, this._handle) {
     _storeGetUserBalanceJson = _lib.lookupFunction<
         Pointer<Utf8> Function(Uint64, Pointer<Utf8>),

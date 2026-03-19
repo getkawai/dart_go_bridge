@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
-class WalletSetupBridge {
+import 'walletsetup_bridge_interface.dart';
+
+class WalletSetupBridge implements WalletSetupBridgeInterface {
   WalletSetupBridge._(this._lib) {
     _walletValidateMnemonicJson = _lib.lookupFunction<
         Pointer<Utf8> Function(Pointer<Utf8>),

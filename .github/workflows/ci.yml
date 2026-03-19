@@ -41,9 +41,18 @@ jobs:
         working-directory: native/go
         run: go test ./...
 
-      - name: Run Flutter tests
+      - name: Run Flutter tests with coverage
         working-directory: .
-        run: flutter test
+        run: flutter test --coverage
+
+      - name: Print Flutter coverage summary
+        working-directory: .
+        run: |
+          if command -v lcov &>/dev/null; then
+            lcov --summary coverage/lcov.info
+          else
+            echo "lcov not installed – skipping summary"
+          fi
 
   android:
     runs-on: ubuntu-latest
