@@ -5,6 +5,7 @@ go 1.26.0
 require (
 	github.com/getkawai/unillm v0.1.4
 	github.com/kawai-network/x v1.0.43
+	github.com/kawai-network/y v0.1.15
 )
 
 require (
@@ -46,7 +47,6 @@ require (
 	github.com/kaptinlin/jsonschema v0.7.3 // indirect
 	github.com/kaptinlin/messageformat-go v0.4.18 // indirect
 	github.com/kawai-network/contracts v0.1.3 // indirect
-	github.com/kawai-network/y v0.1.15 // indirect
 	github.com/openai/openai-go/v3 v3.28.0 // indirect
 	github.com/shirou/gopsutil v3.21.4-0.20210419000835-c7a38de76ee5+incompatible // indirect
 	github.com/supranational/blst v0.3.16-0.20250831170142-f48500c1fdbe // indirect
@@ -65,6 +65,7 @@ require (
 	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/term v0.40.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 	google.golang.org/genai v1.50.0 // indirect
