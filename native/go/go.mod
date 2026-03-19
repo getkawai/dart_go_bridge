@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/getkawai/unillm v0.1.4
-	github.com/kawai-network/x v1.0.42
+	github.com/kawai-network/x v1.0.43
 )
 
 require (
