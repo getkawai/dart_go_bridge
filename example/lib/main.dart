@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:dart_go_bridge/dart_go_bridge.dart';
+import 'package:dart_go_bridge/llm_bridge_interface.dart';
+import 'package:dart_go_bridge/store_bridge_interface.dart';
 import 'package:flutter/services.dart';
+
+@visibleForTesting
+LlmBridgeInterface Function() llmBridgeFactory = () => LlmBridge.create();
+
+@visibleForTesting
+StoreBridgeInterface Function() storeBridgeFactory = () => StoreBridge.create();
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +42,7 @@ class _MyAppState extends State<MyApp> {
 
   void _initBridge() {
     try {
-      final bridge = StoreBridge.create();
+      final bridge = storeBridgeFactory();
       final contributors = bridge.listContributors();
       bridge.dispose();
       setState(() {
@@ -62,7 +70,7 @@ class _MyAppState extends State<MyApp> {
     });
 
     try {
-      final llm = LlmBridge.create();
+      final llm = llmBridgeFactory();
       await for (final chunk in llm.streamText(
         prompt: _promptController.text,
         system: 'Jawab ringkas dalam bahasa Indonesia.',

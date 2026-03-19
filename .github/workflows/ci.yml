@@ -45,6 +45,10 @@ jobs:
         working-directory: .
         run: flutter test --coverage
 
+      - name: Run example Flutter tests
+        working-directory: example
+        run: flutter test
+
       - name: Print Flutter coverage summary
         working-directory: .
         run: |
